@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* Font declaration */
 @font-face {
   font-family: "Google Sans";
   font-style: normal;
@@ -11,6 +12,7 @@
     U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/* Style definition */
 :root {
   margin: 0;
   padding: 0;
