@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { daysOfWeek } from "../../constants";
+import { useSelectDate } from "../../hooks/useSelectDate";
 import {
   decrementCalendar,
   incrementCalendar,
@@ -17,6 +18,8 @@ export const DatePicker = () => {
 
   const dispatch = useDispatch();
 
+  const selectDate = useSelectDate();
+
   const calendarArray = useMemo(() => {
     const yearMonth = utils.parseISOToDate(currentYearMonth);
     const result = utils.calendarGenerator(
@@ -30,6 +33,10 @@ export const DatePicker = () => {
     const yearMonth = utils.parseISOToDate(currentYearMonth);
     return `${yearMonth.getFullYear()}년 ${yearMonth.getMonth() + 1}월`;
   }, [currentYearMonth]);
+
+  const onClickDate = (date: Date) => {
+    selectDate(date);
+  };
 
   return (
     <div className={date_picker_style_object.wrapper_style}>
@@ -117,6 +124,7 @@ export const DatePicker = () => {
                             ? date_picker_style_object.table_body_current_date_style
                             : date_picker_style_object.table_body_none_date_style)
                         }
+                        onClick={() => onClickDate(date)}
                       >
                         {date.getDate()}
                       </button>
