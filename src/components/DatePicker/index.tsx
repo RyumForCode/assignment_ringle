@@ -18,8 +18,10 @@ export const DatePicker = () => {
 
   const dispatch = useDispatch();
 
+  // Custom hook for change calendar via date selection from calendar
   const selectDate = useSelectDate();
 
+  // Memoization from calendarGenerator function
   const calendarArray = useMemo(() => {
     const yearMonth = utils.parseISOToDate(currentYearMonth);
     const result = utils.calendarGenerator(
@@ -29,11 +31,13 @@ export const DatePicker = () => {
     return result;
   }, [currentYearMonth]);
 
+  // Year and Month display string parser
   const yearMonthDisplayParser = useMemo(() => {
     const yearMonth = utils.parseISOToDate(currentYearMonth);
     return `${yearMonth.getFullYear()}년 ${yearMonth.getMonth() + 1}월`;
   }, [currentYearMonth]);
 
+  // Event handler for date button elements
   const onClickDate = (date: Date) => {
     selectDate(date);
   };
