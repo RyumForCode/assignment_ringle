@@ -35,7 +35,8 @@ const header_style_object = {
     "h-[40px] px-[24px] m-[4px_20px_4px_0] " +
     "border-[1px] border-[var(--color-border)] rounded-full " +
     "text-[14px] " +
-    "cursor-pointer hover:bg-[var(--color-hoverGray)] duration-[100ms] ",
+    "cursor-pointer hover:bg-[var(--color-hoverGray)] duration-[100ms] " +
+    "active:bg-[var(--color-activeGray)] ",
   unit_change_arrow_icon_style:
     "p-[4px] rounded-full " +
     "cursor-pointer hover:bg-[var(--color-hoverGray)] duration-[100ms] ",

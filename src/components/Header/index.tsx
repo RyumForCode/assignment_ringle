@@ -1,6 +1,15 @@
+import { useSelectDate } from "../../hooks/useSelectDate";
 import header_style_object from "./style";
 
 export const Header = () => {
+  // Custom hook for change calendar via date selection from calendar
+  const selectDate = useSelectDate();
+
+  // Event handler for date button elements
+  const onClickTodayButton = () => {
+    selectDate(new Date());
+  };
+
   return (
     <header className={header_style_object.wrapper_style}>
       <div className={header_style_object.logo_container_style}>
@@ -18,7 +27,10 @@ export const Header = () => {
       </div>
       <div className={header_style_object.interaction_container_style}>
         <div className={header_style_object.date_controller_style}>
-          <button className={header_style_object.today_finder_button_style}>
+          <button
+            className={header_style_object.today_finder_button_style}
+            onClick={onClickTodayButton}
+          >
             오늘
           </button>
           <button className={header_style_object.unit_change_arrow_icon_style}>

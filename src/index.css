@@ -20,7 +20,11 @@
 
   --color-white: #ffffff;
   --color-black: #1f1f1f;
+  --color-key: #0b57d0;
+  --color-sub: #c2e7ff;
+  --color-hoverSub: #b3d7ef;
   --color-logoGray: #1f1f1f;
   --color-hoverGray: #eaebee;
+  --color-activeGray: #d9dbde;
   --color-border: #747775;
 }
