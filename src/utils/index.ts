@@ -24,6 +24,9 @@ const utils = {
       date1.getDate() === date2.getDate()
     );
   },
+  getDateWithoutTime: (date: Date) => {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  },
   parseISOToDate: (isoString: string) => new Date(isoString),
   stringifyDateToISO: (date: Date) => date.toISOString(),
 };
