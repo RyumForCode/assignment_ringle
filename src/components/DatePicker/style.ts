@@ -25,7 +25,12 @@ const date_picker_style_object = {
   table_body_date_style:
     "h-[24px] w-[24px] rounded-full " +
     "font-[400] text-center " +
-    "cursor-pointer hover:bg-[var(--color-hoverGray)] duration-[100ms] ",
+    "cursor-pointer duration-[100ms] ",
+  table_body_none_date_style: "hover:bg-[var(--color-hoverGray)] ",
+  table_body_current_date_style:
+    "bg-[var(--color-sub)] hover:bg-[var(--color-hoverSub)] ",
+  table_body_today_date_style:
+    "bg-[var(--color-key)] text-[var(--color-white)] ",
 };
 
 export default date_picker_style_object;
