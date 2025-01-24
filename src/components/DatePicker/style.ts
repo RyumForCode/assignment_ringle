@@ -22,7 +22,7 @@ const date_picker_style_object = {
   calendar_display_table_style: "w-full " + "font-[Google_Sans] text-[10px] ",
   table_header_day_style: "h-[28px] " + "font-[400] ",
   table_body_row_style: "py-[2px] px-[calc((100%/7-24px)/2)] box-content ",
-  table_body_date_style:
+  table_body_common_date_style:
     "h-[24px] w-[24px] rounded-full " +
     "font-[400] text-center " +
     "cursor-pointer duration-[100ms] ",

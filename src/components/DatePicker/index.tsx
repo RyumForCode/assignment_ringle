@@ -10,6 +10,7 @@ import utils from "../../utils";
 import date_picker_style_object from "./style";
 
 export const DatePicker = () => {
+  const { currentDate } = useSelector((state: RootState) => state.currentDate);
   const { currentYearMonth } = useSelector(
     (state: RootState) => state.calendar
   );
@@ -93,6 +94,15 @@ export const DatePicker = () => {
               {calendarArray.map((week: Date[], weekIndex: number) => {
                 const trKey = week[0].getTime() + "-from-" + weekIndex;
                 const weekElements = week.map((date: Date) => {
+                  const isCurrent = utils.isSameDate(
+                    date,
+                    utils.parseISOToDate(currentDate)
+                  );
+                  const isToday = utils.isSameDate(
+                    date,
+                    utils.getDateWithoutTime(new Date())
+                  );
+
                   return (
                     <td
                       key={date.getTime()}
@@ -100,7 +110,12 @@ export const DatePicker = () => {
                     >
                       <button
                         className={
-                          date_picker_style_object.table_body_date_style
+                          date_picker_style_object.table_body_common_date_style +
+                          (isToday
+                            ? date_picker_style_object.table_body_today_date_style
+                            : isCurrent
+                            ? date_picker_style_object.table_body_current_date_style
+                            : date_picker_style_object.table_body_none_date_style)
                         }
                       >
                         {date.getDate()}
