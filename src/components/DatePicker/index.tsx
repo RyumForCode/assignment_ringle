@@ -46,13 +46,11 @@ export const DatePicker = () => {
             </span>
             <span>
               <button
-                onClick={() => {
-                  dispatch(decrementCalendar());
-                }}
                 className={
                   date_picker_style_object.navigation_arrow_button_style +
                   "mr-[5px] "
                 }
+                onClick={() => dispatch(decrementCalendar())}
               >
                 <img
                   src="/icons/chevron_left.svg"
@@ -62,12 +60,10 @@ export const DatePicker = () => {
                 />
               </button>
               <button
-                onClick={() => {
-                  dispatch(incrementCalendar());
-                }}
                 className={
                   date_picker_style_object.navigation_arrow_button_style
                 }
+                onClick={() => dispatch(incrementCalendar())}
               >
                 <img
                   src="/icons/chevron_right.svg"
