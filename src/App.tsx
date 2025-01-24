@@ -1,13 +1,16 @@
 import { DatePicker } from "./components/DatePicker";
 import { Header } from "./components/Header";
+import { MainLayout } from "./components/MainLayout";
+import { SidePanel } from "./components/SidePanel";
 
 function App() {
   return (
     <div>
       <Header />
-      <main>
+      <MainLayout>
         <DatePicker />
-      </main>
+        <SidePanel />
+      </MainLayout>
     </div>
   );
 }

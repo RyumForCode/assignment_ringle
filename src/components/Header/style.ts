@@ -28,7 +28,7 @@ const header_style_object = {
     "m-[4px_2px_4px_0] p-[8px] rounded-full " +
     "cursor-pointer hover:bg-[var(--color-hoverGray)] duration-[100ms] ",
   profile_button_style:
-    "w-[32px] h-[32px] m-[8px_6px_8px_10px] rounded-full bg-[#43accc] " +
+    "w-[32px] h-[32px] m-[8px_6px_8px_10px] outline-transparent rounded-full bg-[#43accc] " +
     "font-[Google_Sans] text-[var(--color-white)] " +
     "cursor-pointer outline-[4px] hover:outline-[var(--color-hoverGray)] duration-[100ms] ",
   today_finder_button_style:
