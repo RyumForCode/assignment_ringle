@@ -6,7 +6,9 @@ interface CurrentYearMonth {
 }
 
 const initialState: CurrentYearMonth = {
-  currentYearMonth: utils.stringifyDateToISO(new Date()),
+  currentYearMonth: utils.stringifyDateToISO(
+    utils.getDateWithoutTime(new Date())
+  ),
 };
 
 const moveStepCalendar = (currentISOString: string, delta: -1 | 1): string => {
