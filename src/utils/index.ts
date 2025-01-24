@@ -17,5 +17,8 @@ const utils = {
 
     return calendar;
   },
+  parseISOToDate: (isoString: string) => new Date(isoString),
+  stringifyDateToISO: (date: Date) => date.toISOString(),
+};
 
 export default utils;
