@@ -64,6 +64,43 @@ const utils = {
       return `${meridiemFormat} ${formatedTime}:${minute}`;
     },
   },
+  calculateCardPosition: (
+    startAtIsoString: string,
+    endToIsoString: string,
+    standardDate: Date
+  ) => {
+    const startAt = utils.parseISOToDate(startAtIsoString);
+    const endTo = utils.parseISOToDate(endToIsoString);
+    const result = { topRatio: 0, bottomRatio: 0 };
+
+    if (startAt.getTime() < standardDate.getTime()) {
+      result.topRatio = 0;
+    } else {
+      const hour = startAt.getHours();
+      const minute = startAt.getMinutes() + hour * 60;
+      result.topRatio = minute / 1440;
+    }
+    if (
+      endTo.getTime() >
+      new Date(standardDate).setDate(standardDate.getDate() + 1)
+    ) {
+      result.bottomRatio = 1;
+    } else {
+      const hour = endTo.getHours();
+      const minute = endTo.getMinutes() + hour * 60;
+      result.bottomRatio = minute / 1440;
+    }
+
+    return result;
+  },
+  isToday: (date: Date) => {
+    const today = new Date();
+    return (
+      date.getFullYear() === today.getFullYear() &&
+      date.getMonth() === today.getMonth() &&
+      date.getDate() === today.getDate()
+    );
+  },
 };
 
 export default utils;
