@@ -3,7 +3,10 @@ const schedule_panel_style_object = {
     "w-full h-[calc(100%-16px)] mb-[16px] bg-[var(--color-white)] rounded-[28px] ",
   header_container_style:
     "w-full h-[84px] " + "flex flex-row justify-center items-center ",
-  header_spacer_style: "w-[62.19px] h-full shrink-0 ",
+  header_spacer_style:
+    "w-[62.19px] h-full pr-[4px] pb-[4px] shrink-0 " +
+    "flex justify-end items-end " +
+    "font-[Google_Sans] font-[500] text-[11px] text-[var(--color-textGray)] ",
   header_spacer_gap_style:
     "w-[9px] h-full shrink-0 " + "border-b-[1px] border-[#dde3ea] ",
   header_day_container_style:
