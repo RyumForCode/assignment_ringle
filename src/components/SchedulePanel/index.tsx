@@ -79,7 +79,7 @@ export const SchedulePanel = () => {
             className={schedule_panel_style_object.body_week_array_spacer_style}
           />
           {weekArray.map((date: Date) => (
-            <WeekColumn date={date} />
+            <WeekColumn key={date.toISOString() + "week-col"} date={date} />
           ))}
         </div>
       </div>
