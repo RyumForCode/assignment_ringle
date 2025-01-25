@@ -58,7 +58,9 @@ export const ScheduleCard = ({
       key={scheduleObject.uid}
       onClick={onClickScheduleCard}
     >
-      <span>{scheduleObject.title}</span>
+      <span className={style_object.title_span_style}>
+        {scheduleObject.title !== "" ? scheduleObject.title : "(제목 없음)"}
+      </span>
       <span>{timeRangeDisplay}</span>
     </button>
   );
