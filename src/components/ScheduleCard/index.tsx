@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { ScheduleObject } from "../../store/scheduleSlice";
 import utils from "../../utils";
-import schedule_card_style_object from "./style";
+import style_object from "./style";
 
 export const ScheduleCard = ({
   scheduleObject,
@@ -39,7 +39,7 @@ export const ScheduleCard = ({
 
   return (
     <button
-      className={schedule_card_style_object.card_button_style}
+      className={style_object.card_button_style}
       style={cardStyleObject}
       key={scheduleObject.uid}
       onClick={(e) => {

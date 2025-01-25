@@ -13,7 +13,7 @@ import { addNewSchedule } from "../../store/scheduleSlice";
 import { RootState } from "../../store/store";
 import utils from "../../utils";
 import { DateTimeDropDown } from "../DateTimeDropDown";
-import schedule_create_modal_style_object from "./style";
+import style_object from "./style";
 
 export const ScheduleCreateModal = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -117,25 +117,25 @@ export const ScheduleCreateModal = () => {
   return (
     <div
       ref={containerRef}
-      className={schedule_create_modal_style_object.modal_wrapper_style}
+      className={style_object.modal_wrapper_style}
       style={{
         top: position.y,
         left: position.x,
         display: isOpen ? "block" : "none",
       }}
     >
-      <div className={schedule_create_modal_style_object.top_bar_style}>
+      <div className={style_object.top_bar_style}>
         <button
-          className={schedule_create_modal_style_object.close_button_style}
+          className={style_object.close_button_style}
           onClick={closeModalAction}
         >
           <img src="/icons/close.svg" alt="close icon" />
         </button>
       </div>
-      <div className={schedule_create_modal_style_object.title_section_style}>
+      <div className={style_object.title_section_style}>
         <input
           ref={titleRef}
-          className={schedule_create_modal_style_object.title_input_style}
+          className={style_object.title_input_style}
           type="text"
           placeholder="제목 추가"
           value={title}
@@ -144,44 +144,24 @@ export const ScheduleCreateModal = () => {
           }}
         />
       </div>
-      <div
-        className={schedule_create_modal_style_object.select_type_section_style}
-      >
-        <button
-          className={
-            schedule_create_modal_style_object.select_type_button_style
-          }
-        >
+      <div className={style_object.select_type_section_style}>
+        <button className={style_object.select_type_button_style}>
           이벤트
         </button>
       </div>
-      <div
-        className={schedule_create_modal_style_object.date_range_section_style}
-      >
-        <div
-          className={schedule_create_modal_style_object.date_range_icon_style}
-        >
+      <div className={style_object.date_range_section_style}>
+        <div className={style_object.date_range_icon_style}>
           <img src="/icons/schedule.svg" alt="schedule icon" />
         </div>
         <input
-          className={
-            schedule_create_modal_style_object.date_range_input_style +
-            "w-[137px] "
-          }
+          className={style_object.date_range_input_style + "w-[137px] "}
           type="date"
           value={utils.inputTimeParser.dateInput(startAt)}
           onChange={onChangeDate}
         />
-        <span
-          className={
-            schedule_create_modal_style_object.date_range_input_wrapper_style
-          }
-        >
+        <span className={style_object.date_range_input_wrapper_style}>
           <input
-            className={
-              schedule_create_modal_style_object.date_range_input_style +
-              "w-[100px] "
-            }
+            className={style_object.date_range_input_style + "w-[100px] "}
             type="text"
             placeholder="hh:mm"
             defaultValue={utils.inputTimeParser.timeInput(startAt)}
@@ -195,16 +175,9 @@ export const ScheduleCreateModal = () => {
           />
         </span>
         <span>-</span>
-        <span
-          className={
-            schedule_create_modal_style_object.date_range_input_wrapper_style
-          }
-        >
+        <span className={style_object.date_range_input_wrapper_style}>
           <input
-            className={
-              schedule_create_modal_style_object.date_range_input_style +
-              "w-[100px] "
-            }
+            className={style_object.date_range_input_style + "w-[100px] "}
             type="text"
             placeholder="hh:mm"
             value={utils.inputTimeParser.timeInput(endTo)}
@@ -218,16 +191,12 @@ export const ScheduleCreateModal = () => {
           />
         </span>
       </div>
-      <div
-        className={schedule_create_modal_style_object.decision_section_style}
-      >
-        <button
-          className={schedule_create_modal_style_object.option_button_style}
-        >
+      <div className={style_object.decision_section_style}>
+        <button className={style_object.option_button_style}>
           옵션 더보기
         </button>
         <button
-          className={schedule_create_modal_style_object.save_button_style}
+          className={style_object.save_button_style}
           onClick={onClickSaveButton}
         >
           저장

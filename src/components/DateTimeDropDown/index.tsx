@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import utils from "../../utils";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
-import date_time_drop_down_style_object from "./style";
+import style_object from "./style";
 
 interface DropDownContent {
   title: string;
@@ -37,16 +37,16 @@ export const DateTimeDropDown = ({
   return (
     <ul
       ref={ref}
-      className={date_time_drop_down_style_object.drop_down_container_style}
+      className={style_object.drop_down_container_style}
       style={{ display: isOpen ? "block" : "none" }}
     >
       {objectArray.map(({ title, date }) => (
         <li
           key={utils.stringifyDateToISO(date) + "dropdown"}
-          className={date_time_drop_down_style_object.drop_down_list_style}
+          className={style_object.drop_down_list_style}
         >
           <button
-            className={date_time_drop_down_style_object.list_button_style}
+            className={style_object.list_button_style}
             onClick={() => onClickListButton(date)}
           >
             {title}

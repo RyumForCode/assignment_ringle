@@ -4,7 +4,7 @@ import { openModal } from "../../store/modalSlice";
 import { RootState } from "../../store/store";
 import utils from "../../utils";
 import { ScheduleCard } from "../ScheduleCard";
-import week_column_style_object from "./style";
+import style_object from "./style";
 
 export const WeekColumn = ({ date }: { date: Date }) => {
   const { scheduleList } = useSelector((state: RootState) => state.schedule);
@@ -50,7 +50,7 @@ export const WeekColumn = ({ date }: { date: Date }) => {
 
   return (
     <div
-      className={week_column_style_object.week_column_div_style}
+      className={style_object.week_column_div_style}
       key={utils.stringifyDateToISO(date) + "column"}
       onClick={(e) => {
         onClickWeekColumn(e, date);
