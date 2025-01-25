@@ -164,7 +164,7 @@ export const ScheduleCreateModal = () => {
             className={style_object.date_range_input_style + "w-[100px] "}
             type="text"
             placeholder="hh:mm"
-            defaultValue={utils.inputTimeParser.timeInput(startAt)}
+            value={utils.inputTimeParser.timeInput(startAt)}
             onFocus={() => setStartAtInputIsOpened(true)}
           />
           <DateTimeDropDown
