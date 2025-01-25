@@ -8,7 +8,12 @@ import React, {
 import { useDispatch, useSelector } from "react-redux";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
 import { setCurrentDate } from "../../store/currentDateSlice";
-import { closeModal, setEndTo, setStartAt } from "../../store/modalSlice";
+import {
+  closeModal,
+  setEndTo,
+  setStartAt,
+  setTitle,
+} from "../../store/modalSlice";
 import { addNewSchedule } from "../../store/scheduleSlice";
 import { RootState } from "../../store/store";
 import utils from "../../utils";
@@ -19,13 +24,11 @@ export const ScheduleCreateModal = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
 
-  const { isOpen, position, startAtIsoString, endToIsoString } = useSelector(
-    (state: RootState) => state.modal
-  );
+  const { isOpen, position, startAtIsoString, endToIsoString, title } =
+    useSelector((state: RootState) => state.modal);
 
   const dispatch = useDispatch();
 
-  const [title, setTitle] = useState<string>("");
   const [startAtInputIsOpened, setStartAtInputIsOpened] =
     useState<boolean>(false); // startAt input dropdown state
   const [endToInputIsOpened, setEndToInputIsOpened] = useState<boolean>(false); // EndTo input dropdown state
@@ -68,7 +71,6 @@ export const ScheduleCreateModal = () => {
   // Close modal and reset title input
   const closeModalAction = () => {
     dispatch(closeModal());
-    setTitle("");
   };
 
   // onChange event for startAt date input
@@ -142,7 +144,7 @@ export const ScheduleCreateModal = () => {
           placeholder="제목 추가"
           value={title}
           onChange={(e) => {
-            setTitle(e.target.value);
+            dispatch(setTitle({ title: e.target.value }));
           }}
         />
       </div>
