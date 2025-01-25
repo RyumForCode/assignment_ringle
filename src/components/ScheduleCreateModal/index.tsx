@@ -54,7 +54,9 @@ export const ScheduleCreateModal = () => {
       const result = newArray.map((_, index) => {
         const valueDate = new Date(standardDate);
         valueDate.setMinutes(valueDate.getMinutes() + index * 15);
-        const title = utils.inputTimeParser.timeInput(valueDate);
+        const title =
+          utils.inputTimeParser.timeInput(valueDate) +
+          (isEndTo ? ` (${(index * 15) / 60}시간)` : "");
         return { title, date: valueDate };
       });
 
