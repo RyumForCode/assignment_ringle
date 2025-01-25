@@ -46,6 +46,24 @@ const utils = {
   },
   parseISOToDate: (isoString: string) => new Date(isoString),
   stringifyDateToISO: (date: Date) => date.toISOString(),
+  generateUID: () => Math.random().toString(36).slice(2, 11),
+  inputTimeParser: {
+    dateInput: (date: Date) => {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+
+      return `${year}-${month}-${day}`;
+    },
+    timeInput: (date: Date) => {
+      const hour = date.getHours();
+      const meridiemFormat = Math.floor(hour / 12) ? "오후" : "오전";
+      const formatedTime = String(hour % 12);
+      const minute = String(date.getMinutes()).padStart(2, "0");
+
+      return `${meridiemFormat} ${formatedTime}:${minute}`;
+    },
+  },
 };
 
 export default utils;
