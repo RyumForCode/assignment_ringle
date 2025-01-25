@@ -57,7 +57,11 @@ export const WeekColumn = ({ date }: { date: Date }) => {
       }}
     >
       {filteredSchedules.map((scheduleObject) => (
-        <ScheduleCard scheduleObject={scheduleObject} date={date} />
+        <ScheduleCard
+          scheduleObject={scheduleObject}
+          date={date}
+          key={scheduleObject.uid + "schedule_card"}
+        />
       ))}
     </div>
   );
