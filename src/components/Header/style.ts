@@ -41,7 +41,8 @@ const header_style_object = {
     "p-[4px] rounded-full " +
     "cursor-pointer hover:bg-[var(--color-hoverGray)] duration-[100ms] ",
   current_date_indicator_style:
-    "p-[8px] mx-[11px] " + "font-[Google_Sans] text-[21.5px] select-none ",
+    "p-[8px] mx-[11px] " +
+    "font-[Google_Sans] text-[21.5px] leading-[100%] select-none ",
   calendar_unit_dropdown_button_style:
     "h-[40px] ml-[12px] my-[4px] px-[17px] " +
     "flex flex-row justify-center items-center " +
