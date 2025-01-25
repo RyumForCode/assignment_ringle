@@ -78,6 +78,14 @@ export const SchedulePanel = () => {
               date={date}
             />
           ))}
+          <div className={style_object.table_row_container_style}>
+            {new Array(23).fill(null).map((_, i) => (
+              <div
+                key={"tableRow" + i}
+                className={style_object.table_row_style}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

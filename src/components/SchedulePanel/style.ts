@@ -32,8 +32,13 @@ const schedule_panel_style_object = {
     "font-[Google_Sans] font-[500] text-[11px] text-[var(--color-textGray)] ",
   body_time_table_title_style: "absolute bottom-[-8px] right-[8px] ",
   body_week_array_container_style:
-    "w-[100%] h-[100%] " + "flex flex-row justify-between items-start ",
+    "relative w-[100%] h-[100%] " +
+    "flex flex-row justify-between items-start ",
   body_week_array_spacer_style: "w-[9px] h-[100%] ",
+  table_row_container_style:
+    "absolute top-0 left-0 w-[100%] h-[1152px] " +
+    "flex flex-col justify-evenly items-center ",
+  table_row_style: "w-[100%] h-[1px] bg-[#dde3ea] ",
 };
 
 export default schedule_panel_style_object;
