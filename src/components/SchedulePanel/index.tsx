@@ -16,10 +16,20 @@ export const SchedulePanel = () => {
     return result;
   }, [currentDate]);
 
+  // Function to get GMT unit offset
+  const getGMTOffset = useMemo(() => {
+    const date = new Date();
+    const offsetInMinutes = date.getTimezoneOffset();
+    const offsetHours = String(Math.abs(offsetInMinutes) / 60).padStart(2, "0");
+    const sign = offsetInMinutes > 0 ? "-" : "+";
+
+    return `GMT ${sign} ${offsetHours}`;
+  }, []);
+
   return (
     <div className={style_object.schedule_panel_wrapper_style}>
       <div className={style_object.header_container_style}>
-        <div className={style_object.header_spacer_style} />
+        <div className={style_object.header_spacer_style}>{getGMTOffset}</div>
         <div className={style_object.header_spacer_gap_style} />
         <div className={style_object.header_day_container_style}>
           {weekArray.map((date: Date, index: number) => (
@@ -68,6 +78,14 @@ export const SchedulePanel = () => {
               date={date}
             />
           ))}
+          <div className={style_object.table_row_container_style}>
+            {new Array(23).fill(null).map((_, i) => (
+              <div
+                key={"tableRow" + i}
+                className={style_object.table_row_style}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

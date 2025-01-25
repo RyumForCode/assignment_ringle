@@ -3,7 +3,10 @@ const schedule_panel_style_object = {
     "w-full h-[calc(100%-16px)] mb-[16px] bg-[var(--color-white)] rounded-[28px] ",
   header_container_style:
     "w-full h-[84px] " + "flex flex-row justify-center items-center ",
-  header_spacer_style: "w-[62.19px] h-full shrink-0 ",
+  header_spacer_style:
+    "w-[62.19px] h-full pr-[4px] pb-[4px] shrink-0 " +
+    "flex justify-end items-end " +
+    "font-[Google_Sans] font-[500] text-[11px] text-[var(--color-textGray)] ",
   header_spacer_gap_style:
     "w-[9px] h-full shrink-0 " + "border-b-[1px] border-[#dde3ea] ",
   header_day_container_style:
@@ -29,8 +32,13 @@ const schedule_panel_style_object = {
     "font-[Google_Sans] font-[500] text-[11px] text-[var(--color-textGray)] ",
   body_time_table_title_style: "absolute bottom-[-8px] right-[8px] ",
   body_week_array_container_style:
-    "w-[100%] h-[100%] " + "flex flex-row justify-between items-start ",
+    "relative w-[100%] h-[100%] " +
+    "flex flex-row justify-between items-start ",
   body_week_array_spacer_style: "w-[9px] h-[100%] ",
+  table_row_container_style:
+    "absolute top-0 left-0 w-[100%] h-[1152px] " +
+    "flex flex-col justify-evenly items-center ",
+  table_row_style: "w-[100%] h-[1px] bg-[#dde3ea] ",
 };
 
 export default schedule_panel_style_object;

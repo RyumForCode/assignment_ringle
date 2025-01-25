@@ -1,5 +1,6 @@
 import { DatePicker } from "./components/DatePicker";
 import { Header } from "./components/Header";
+import { InspectPanel } from "./components/InspectPanel";
 import { MainLayout } from "./components/MainLayout";
 import { ScheduleCreateModal } from "./components/ScheduleCreateModal";
 import { SchedulePanel } from "./components/SchedulePanel";
@@ -15,6 +16,7 @@ function App() {
         <SidePanel />
       </MainLayout>
       <ScheduleCreateModal />
+      <InspectPanel />
     </>
   );
 }

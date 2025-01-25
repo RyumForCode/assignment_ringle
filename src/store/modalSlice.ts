@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface ModalObject {
   isOpen: boolean;
   position: { x: number; y: number };
+  title: string;
   startAtIsoString: string | null;
   endToIsoString: string | null;
 }
@@ -10,6 +11,7 @@ interface ModalObject {
 const initialState: ModalObject = {
   isOpen: false,
   position: { x: 0, y: 0 },
+  title: "",
   startAtIsoString: null,
   endToIsoString: null,
 };
@@ -34,6 +36,7 @@ const modalSlice = createSlice({
     closeModal(state) {
       state.startAtIsoString = null;
       state.endToIsoString = null;
+      state.title = "";
       state.isOpen = false;
     },
     setStartAt(
@@ -52,9 +55,12 @@ const modalSlice = createSlice({
     ) {
       state.endToIsoString = action.payload.isoString;
     },
+    setTitle(state, action: PayloadAction<{ title: string }>) {
+      state.title = action.payload.title;
+    },
   },
 });
 
-export const { openModal, closeModal, setStartAt, setEndTo } =
+export const { openModal, closeModal, setStartAt, setEndTo, setTitle } =
   modalSlice.actions;
 export default modalSlice.reducer;

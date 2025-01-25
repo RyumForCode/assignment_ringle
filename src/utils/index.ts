@@ -101,6 +101,15 @@ const utils = {
       date.getDate() === today.getDate()
     );
   },
+  timeRangeDisplayParser: (startDate: Date, endDate: Date) => {
+    const startTimeDisplay = utils.inputTimeParser.timeInput(startDate);
+    const endTimeDisplay = utils.inputTimeParser.timeInput(endDate);
+
+    if (startTimeDisplay.split(" ")[0] === endTimeDisplay.split(" ")[0]) {
+      return `${startTimeDisplay}~${endTimeDisplay.split(" ")[1]}`;
+    }
+    return `${startTimeDisplay}~${endTimeDisplay}`;
+  },
 };
 
 export default utils;

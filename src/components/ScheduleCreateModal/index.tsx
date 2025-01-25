@@ -8,7 +8,12 @@ import React, {
 import { useDispatch, useSelector } from "react-redux";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
 import { setCurrentDate } from "../../store/currentDateSlice";
-import { closeModal, setEndTo, setStartAt } from "../../store/modalSlice";
+import {
+  closeModal,
+  setEndTo,
+  setStartAt,
+  setTitle,
+} from "../../store/modalSlice";
 import { addNewSchedule } from "../../store/scheduleSlice";
 import { RootState } from "../../store/store";
 import utils from "../../utils";
@@ -19,13 +24,11 @@ export const ScheduleCreateModal = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
 
-  const { isOpen, position, startAtIsoString, endToIsoString } = useSelector(
-    (state: RootState) => state.modal
-  );
+  const { isOpen, position, startAtIsoString, endToIsoString, title } =
+    useSelector((state: RootState) => state.modal);
 
   const dispatch = useDispatch();
 
-  const [title, setTitle] = useState<string>("");
   const [startAtInputIsOpened, setStartAtInputIsOpened] =
     useState<boolean>(false); // startAt input dropdown state
   const [endToInputIsOpened, setEndToInputIsOpened] = useState<boolean>(false); // EndTo input dropdown state
@@ -54,7 +57,9 @@ export const ScheduleCreateModal = () => {
       const result = newArray.map((_, index) => {
         const valueDate = new Date(standardDate);
         valueDate.setMinutes(valueDate.getMinutes() + index * 15);
-        const title = utils.inputTimeParser.timeInput(valueDate);
+        const title =
+          utils.inputTimeParser.timeInput(valueDate) +
+          (isEndTo ? ` (${(index * 15) / 60}시간)` : "");
         return { title, date: valueDate };
       });
 
@@ -66,16 +71,15 @@ export const ScheduleCreateModal = () => {
   // Close modal and reset title input
   const closeModalAction = () => {
     dispatch(closeModal());
-    setTitle("");
   };
 
-  // onChange event for startAt date input
+  // onChange event for startAt date and endTo input
   const onChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const [year, month, day] = e.target.value
       .split("-")
       .map((string) => Number(string));
 
-    const newDate = new Date(
+    const newStartAt = new Date(
       year,
       month - 1,
       day,
@@ -83,8 +87,19 @@ export const ScheduleCreateModal = () => {
       startAt.getMinutes()
     );
 
-    dispatch(setStartAt({ isoString: utils.stringifyDateToISO(newDate) }));
-    dispatch(setCurrentDate({ isoString: utils.stringifyDateToISO(newDate) }));
+    const newEndTo = new Date(
+      year,
+      month - 1,
+      day,
+      endTo.getHours(),
+      endTo.getMinutes()
+    );
+
+    dispatch(setStartAt({ isoString: utils.stringifyDateToISO(newStartAt) }));
+    dispatch(setEndTo({ isoString: utils.stringifyDateToISO(newEndTo) }));
+    dispatch(
+      setCurrentDate({ isoString: utils.stringifyDateToISO(newStartAt) })
+    );
   };
 
   // onClick event for save button
@@ -112,7 +127,7 @@ export const ScheduleCreateModal = () => {
     return () => {
       document.removeEventListener("keydown", callback);
     };
-  }, []);
+  });
 
   return (
     <div
@@ -140,7 +155,7 @@ export const ScheduleCreateModal = () => {
           placeholder="제목 추가"
           value={title}
           onChange={(e) => {
-            setTitle(e.target.value);
+            dispatch(setTitle({ title: e.target.value }));
           }}
         />
       </div>
@@ -164,8 +179,9 @@ export const ScheduleCreateModal = () => {
             className={style_object.date_range_input_style + "w-[100px] "}
             type="text"
             placeholder="hh:mm"
-            defaultValue={utils.inputTimeParser.timeInput(startAt)}
+            value={utils.inputTimeParser.timeInput(startAt)}
             onFocus={() => setStartAtInputIsOpened(true)}
+            onChange={() => {}}
           />
           <DateTimeDropDown
             objectArray={dateTimeArrayGenerator(startAt)}
@@ -182,6 +198,7 @@ export const ScheduleCreateModal = () => {
             placeholder="hh:mm"
             value={utils.inputTimeParser.timeInput(endTo)}
             onFocus={() => setEndToInputIsOpened(true)}
+            onChange={() => {}}
           />
           <DateTimeDropDown
             objectArray={dateTimeArrayGenerator(startAt, true)}
