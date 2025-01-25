@@ -73,13 +73,13 @@ export const ScheduleCreateModal = () => {
     dispatch(closeModal());
   };
 
-  // onChange event for startAt date input
+  // onChange event for startAt date and endTo input
   const onChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const [year, month, day] = e.target.value
       .split("-")
       .map((string) => Number(string));
 
-    const newDate = new Date(
+    const newStartAt = new Date(
       year,
       month - 1,
       day,
@@ -87,8 +87,19 @@ export const ScheduleCreateModal = () => {
       startAt.getMinutes()
     );
 
-    dispatch(setStartAt({ isoString: utils.stringifyDateToISO(newDate) }));
-    dispatch(setCurrentDate({ isoString: utils.stringifyDateToISO(newDate) }));
+    const newEndTo = new Date(
+      year,
+      month - 1,
+      day,
+      endTo.getHours(),
+      endTo.getMinutes()
+    );
+
+    dispatch(setStartAt({ isoString: utils.stringifyDateToISO(newStartAt) }));
+    dispatch(setEndTo({ isoString: utils.stringifyDateToISO(newEndTo) }));
+    dispatch(
+      setCurrentDate({ isoString: utils.stringifyDateToISO(newStartAt) })
+    );
   };
 
   // onClick event for save button
@@ -170,6 +181,7 @@ export const ScheduleCreateModal = () => {
             placeholder="hh:mm"
             value={utils.inputTimeParser.timeInput(startAt)}
             onFocus={() => setStartAtInputIsOpened(true)}
+            onChange={() => {}}
           />
           <DateTimeDropDown
             objectArray={dateTimeArrayGenerator(startAt)}
@@ -186,6 +198,7 @@ export const ScheduleCreateModal = () => {
             placeholder="hh:mm"
             value={utils.inputTimeParser.timeInput(endTo)}
             onFocus={() => setEndToInputIsOpened(true)}
+            onChange={() => {}}
           />
           <DateTimeDropDown
             objectArray={dateTimeArrayGenerator(startAt, true)}
