@@ -51,7 +51,7 @@ export const WeekColumn = ({ date }: { date: Date }) => {
   return (
     <div
       className={week_column_style_object.week_column_div_style}
-      key={date.toISOString() + "column"}
+      key={utils.stringifyDateToISO(date) + "column"}
       onClick={(e) => {
         onClickWeekColumn(e, date);
       }}

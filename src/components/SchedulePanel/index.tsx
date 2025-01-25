@@ -25,7 +25,7 @@ export const SchedulePanel = () => {
           {weekArray.map((date: Date, index: number) => (
             <div
               className={schedule_panel_style_object.header_day_block_style}
-              key={date.toISOString() + "week"}
+              key={utils.stringifyDateToISO(date) + "week"}
             >
               <div
                 className={schedule_panel_style_object.header_day_index_style}
@@ -79,7 +79,10 @@ export const SchedulePanel = () => {
             className={schedule_panel_style_object.body_week_array_spacer_style}
           />
           {weekArray.map((date: Date) => (
-            <WeekColumn key={date.toISOString() + "week-col"} date={date} />
+            <WeekColumn
+              key={utils.stringifyDateToISO(date) + "week-col"}
+              date={date}
+            />
           ))}
         </div>
       </div>
