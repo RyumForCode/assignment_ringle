@@ -17,6 +17,23 @@ const utils = {
 
     return calendar;
   },
+  getCurrentWeek: (date: Date) => {
+    const startDay = date.getDay();
+    const week = [];
+
+    const current = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate() - startDay
+    );
+
+    for (let day = 0; day < 7; day++) {
+      week.push(new Date(current));
+      current.setDate(current.getDate() + 1);
+    }
+
+    return week;
+  },
   isSameDate: (date1: Date, date2: Date) => {
     return (
       date1.getFullYear() === date2.getFullYear() &&
