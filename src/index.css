@@ -33,12 +33,12 @@
 
 /* [Scroll bar css] */
 div::-webkit-scrollbar {
-  background-color: #fff;
+  background-color: transparent;
   width: 16px;
 }
 
 div::-webkit-scrollbar-track {
-  background-color: #fff;
+  background-color: transparent;
 }
 
 div::-webkit-scrollbar-thumb {
