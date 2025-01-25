@@ -35,8 +35,14 @@ const scheduleSlice = createSlice({
       const result = { ...payload, uid: utils.generateUID() };
       state.scheduleList.push(result);
     },
+    deleteSchedule(state, action: PayloadAction<string>) {
+      const result = state.scheduleList.filter(
+        (schedule) => schedule.uid !== action.payload
+      );
+      state.scheduleList = result;
+    },
   },
 });
 
-export const { addNewSchedule } = scheduleSlice.actions;
+export const { addNewSchedule, deleteSchedule } = scheduleSlice.actions;
 export default scheduleSlice.reducer;
