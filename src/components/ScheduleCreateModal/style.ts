@@ -2,7 +2,7 @@ const schedule_modal_style_object = {
   modal_wrapper_style:
     "fixed top-[0px] left-[0px] " +
     "w-[452px] h-fit rounded-[28px] bg-[var(--color-modalBG)] " +
-    "z-[1] drop-shadow-lg ",
+    "z-[2] drop-shadow-lg ",
   top_bar_style: "relative w-[100%] h-[42px] ",
   close_button_style:
     "absolute top-[10px] right-[14px] " +
