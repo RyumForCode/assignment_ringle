@@ -66,6 +66,8 @@ export const WeekColumn = ({ date }: { date: Date }) => {
     e: React.MouseEvent<HTMLDivElement>,
     date: Date
   ) => {
+    const { x, width } = e.currentTarget.getBoundingClientRect();
+
     const elementTop = e.currentTarget.getBoundingClientRect().top;
     const relativeClickY = e.clientY - elementTop;
     const currentStep = Math.floor(relativeClickY / 24);
@@ -75,8 +77,24 @@ export const WeekColumn = ({ date }: { date: Date }) => {
     startAt.setMinutes(currentStep * 30);
     endTo.setMinutes((currentStep + 2) * 30);
 
+    const cordinate = { x: 0, y: 0 };
+
+    // To compensate modal position
+    if (e.pageY + 299 + 32 > window.innerHeight) {
+      cordinate.y = e.pageY - 299;
+    } else {
+      cordinate.y = e.pageY;
+    }
+
+    // To compensate modal position
+    if (x + width - 4 + 452 + 32 > window.innerWidth) {
+      cordinate.x = x - 4 - 452;
+    } else {
+      cordinate.x = x + width - 4;
+    }
+
     const payload = {
-      position: { x: e.pageX, y: e.pageY },
+      position: cordinate,
       startAtIsoString: utils.stringifyDateToISO(startAt),
       endToIsoString: utils.stringifyDateToISO(endTo),
     };

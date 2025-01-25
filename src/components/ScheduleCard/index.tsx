@@ -42,10 +42,26 @@ export const ScheduleCard = ({
   const onClickScheduleCard = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     if (!ref.current) return;
-    const { top, right } = ref.current.getBoundingClientRect();
+    const { x, width } = ref.current.getBoundingClientRect();
+    const cordinate = { x: 0, y: 0 };
+
+    // To compensate modal position
+    if (e.pageY + 137 + 32 > window.innerHeight) {
+      cordinate.y = e.pageY - 137;
+    } else {
+      cordinate.y = e.pageY;
+    }
+
+    // To compensate modal position
+    if (x + width + 452 + 32 > window.innerWidth) {
+      cordinate.x = x - 4 - 452;
+    } else {
+      cordinate.x = x + width + 4;
+    }
+
     const payload = {
       schedule: scheduleObject,
-      position: { x: right + 8, y: top },
+      position: cordinate,
     };
     dispatch(openModal(payload));
   };
