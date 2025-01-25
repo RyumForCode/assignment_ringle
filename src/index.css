@@ -24,7 +24,9 @@
   --color-sub: #c2e7ff;
   --color-hoverSub: #b3d7ef;
   --color-logoGray: #1f1f1f;
+  --color-textGray: #444746;
   --color-hoverGray: #eaebee;
   --color-activeGray: #d9dbde;
   --color-border: #747775;
+  --color-modalBG: #f0f4f9;
 }

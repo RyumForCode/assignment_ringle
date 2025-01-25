@@ -8,7 +8,7 @@ import {
 } from "../../store/calendarSlice";
 import type { RootState } from "../../store/store";
 import utils from "../../utils";
-import date_picker_style_object from "./style";
+import style_object from "./style";
 
 export const DatePicker = () => {
   const { currentDate } = useSelector((state: RootState) => state.currentDate);
@@ -43,24 +43,23 @@ export const DatePicker = () => {
   };
 
   return (
-    <div className={date_picker_style_object.wrapper_style}>
-      <div className={date_picker_style_object.add_schedule_section_style}>
-        <button className={date_picker_style_object.add_schedule_button_style}>
+    <div className={style_object.wrapper_style}>
+      <div className={style_object.add_schedule_section_style}>
+        <button className={style_object.add_schedule_button_style}>
           <img src="/icons/add.svg" alt="add icon" /> 만들기
           <img src="/icons/arrow_drop_down.svg" alt="arrow drop down icon" />
         </button>
       </div>
-      <div className={date_picker_style_object.calendar_section_style}>
-        <div className={date_picker_style_object.calendar_box_style}>
-          <div className={date_picker_style_object.calendar_header_style}>
-            <span className={date_picker_style_object.current_month_style}>
+      <div className={style_object.calendar_section_style}>
+        <div className={style_object.calendar_box_style}>
+          <div className={style_object.calendar_header_style}>
+            <span className={style_object.current_month_style}>
               {yearMonthDisplayParser}
             </span>
             <span>
               <button
                 className={
-                  date_picker_style_object.navigation_arrow_button_style +
-                  "mr-[5px] "
+                  style_object.navigation_arrow_button_style + "mr-[5px] "
                 }
                 onClick={() => dispatch(decrementCalendar())}
               >
@@ -72,9 +71,7 @@ export const DatePicker = () => {
                 />
               </button>
               <button
-                className={
-                  date_picker_style_object.navigation_arrow_button_style
-                }
+                className={style_object.navigation_arrow_button_style}
                 onClick={() => dispatch(incrementCalendar())}
               >
                 <img
@@ -86,14 +83,12 @@ export const DatePicker = () => {
               </button>
             </span>
           </div>
-          <table
-            className={date_picker_style_object.calendar_display_table_style}
-          >
+          <table className={style_object.calendar_display_table_style}>
             <thead>
               <tr>
                 {daysOfWeek.map((day: string, index: number) => (
                   <th
-                    className={date_picker_style_object.table_header_day_style}
+                    className={style_object.table_header_day_style}
                     key={day + index}
                   >
                     {day}
@@ -117,16 +112,16 @@ export const DatePicker = () => {
                   return (
                     <td
                       key={date.getTime()}
-                      className={date_picker_style_object.table_body_row_style}
+                      className={style_object.table_body_row_style}
                     >
                       <button
                         className={
-                          date_picker_style_object.table_body_common_date_style +
+                          style_object.table_body_common_date_style +
                           (isToday
-                            ? date_picker_style_object.table_body_today_date_style
+                            ? style_object.table_body_today_date_style
                             : isCurrent
-                            ? date_picker_style_object.table_body_current_date_style
-                            : date_picker_style_object.table_body_none_date_style)
+                            ? style_object.table_body_current_date_style
+                            : style_object.table_body_none_date_style)
                         }
                         onClick={() => onClickDate(date)}
                       >
