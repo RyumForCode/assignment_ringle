@@ -112,7 +112,7 @@ export const ScheduleCreateModal = () => {
     return () => {
       document.removeEventListener("keydown", callback);
     };
-  }, []);
+  });
 
   return (
     <div
