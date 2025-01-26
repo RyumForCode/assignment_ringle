@@ -6,6 +6,7 @@ import utils from "../../utils";
 import { ScheduleCard } from "../ScheduleCard";
 import style_object from "./style";
 import { ScheduleObject } from "../../store/scheduleSlice";
+import { TimeIndicator } from "../TimeIndicator";
 
 export const WeekColumn = ({ date }: { date: Date }) => {
   const { scheduleList } = useSelector((state: RootState) => state.schedule);
@@ -157,6 +158,7 @@ export const WeekColumn = ({ date }: { date: Date }) => {
           key={"creating_schedule_card"}
         />
       )}
+      {utils.isToday(date) && <TimeIndicator />}
     </div>
   );
 };
