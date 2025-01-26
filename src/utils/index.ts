@@ -110,6 +110,16 @@ const utils = {
     }
     return `${startTimeDisplay}~${endTimeDisplay}`;
   },
+  repeatWeekChecker: (startAt: Date, endTo: Date, standardDate: Date) => {
+    const oneWeekInMs = 7 * 24 * 60 * 60 * 1000; // 604800000
+    const startAtPattern = startAt.getTime() % oneWeekInMs;
+    const endToPattern = endTo.getTime() % oneWeekInMs;
+    const standardPattern = standardDate.getTime() % oneWeekInMs;
+
+    return (
+      standardPattern === startAtPattern || standardPattern === endToPattern
+    );
+  },
 };
 
 export default utils;
