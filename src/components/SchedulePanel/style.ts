@@ -1,6 +1,6 @@
 const schedule_panel_style_object = {
   schedule_panel_wrapper_style:
-    "w-full h-[calc(100%-16px)] mb-[16px] bg-[var(--color-white)] rounded-[28px] ",
+    "w-full h-[calc(100%-16px)] min-w-[410px] mb-[16px] bg-[var(--color-white)] rounded-[28px] ",
   header_container_style:
     "w-full h-[84px] " + "flex flex-row justify-center items-center ",
   header_spacer_style:
