@@ -81,6 +81,7 @@ export const InspectPanel = () => {
           </div>
           <p className={style_object.time_display_style}>
             {textDisplayParser?.timeDisplay}
+            {schedule?.isRepeat && " (주간 반복 일정)"}
           </p>
         </div>
       </div>
