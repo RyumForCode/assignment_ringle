@@ -6,6 +6,7 @@ export type ScheduleObject = {
   startAtIsoString: string;
   endToIsoString: string;
   uid: string;
+  isRepeat: boolean;
 };
 
 interface ScheduleList {
@@ -26,6 +27,7 @@ const scheduleSlice = createSlice({
         title: string;
         startAtIsoString: string;
         endToIsoString: string;
+        isRepeat: boolean;
       }>
     ) {
       const payload = action.payload;

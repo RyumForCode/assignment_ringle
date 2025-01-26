@@ -11,6 +11,7 @@ import { setCurrentDate } from "../../store/currentDateSlice";
 import {
   closeModal,
   setEndTo,
+  setIsRepeat,
   setStartAt,
   setTitle,
 } from "../../store/modalSlice";
@@ -19,13 +20,20 @@ import { RootState } from "../../store/store";
 import utils from "../../utils";
 import { DateTimeDropDown } from "../DateTimeDropDown";
 import style_object from "./style";
+import { daysOfWeek } from "../../constants";
 
 export const ScheduleCreateModal = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
 
-  const { isOpen, position, startAtIsoString, endToIsoString, title } =
-    useSelector((state: RootState) => state.modal);
+  const {
+    isOpen,
+    position,
+    startAtIsoString,
+    endToIsoString,
+    title,
+    isRepeat,
+  } = useSelector((state: RootState) => state.modal);
 
   const dispatch = useDispatch();
 
@@ -105,7 +113,7 @@ export const ScheduleCreateModal = () => {
   // onClick event for save button
   const onClickSaveButton = () => {
     if (!startAtIsoString || !endToIsoString) return;
-    const payload = { title, startAtIsoString, endToIsoString };
+    const payload = { title, startAtIsoString, endToIsoString, isRepeat };
     dispatch(addNewSchedule(payload));
     closeModalAction();
   };
@@ -164,49 +172,80 @@ export const ScheduleCreateModal = () => {
           이벤트
         </button>
       </div>
-      <div className={style_object.date_range_section_style}>
-        <div className={style_object.date_range_icon_style}>
-          <img src="/icons/schedule.svg" alt="schedule icon" />
+      <div className={style_object.date_params_section_style}>
+        <div className={style_object.date_range_section_style}>
+          <div className={style_object.date_range_icon_style}>
+            <img src="/icons/schedule.svg" alt="schedule icon" />
+          </div>
+          <input
+            className={style_object.date_range_input_style + "w-[137px] "}
+            type="date"
+            value={utils.inputTimeParser.dateInput(startAt)}
+            onChange={onChangeDate}
+          />
+          <span className={style_object.date_range_input_wrapper_style}>
+            <input
+              className={style_object.date_range_input_style + "w-[100px] "}
+              type="text"
+              placeholder="hh:mm"
+              value={utils.inputTimeParser.timeInput(startAt)}
+              onFocus={() => setStartAtInputIsOpened(true)}
+              onChange={() => {}}
+            />
+            <DateTimeDropDown
+              objectArray={dateTimeArrayGenerator(startAt)}
+              isOpen={startAtInputIsOpened}
+              setIsOpen={setStartAtInputIsOpened}
+              action={setStartAt}
+            />
+          </span>
+          <span>-</span>
+          <span className={style_object.date_range_input_wrapper_style}>
+            <input
+              className={style_object.date_range_input_style + "w-[100px] "}
+              type="text"
+              placeholder="hh:mm"
+              value={utils.inputTimeParser.timeInput(endTo)}
+              onFocus={() => setEndToInputIsOpened(true)}
+              onChange={() => {}}
+            />
+            <DateTimeDropDown
+              objectArray={dateTimeArrayGenerator(startAt, true)}
+              isOpen={endToInputIsOpened}
+              setIsOpen={setEndToInputIsOpened}
+              action={setEndTo}
+            />
+          </span>
         </div>
-        <input
-          className={style_object.date_range_input_style + "w-[137px] "}
-          type="date"
-          value={utils.inputTimeParser.dateInput(startAt)}
-          onChange={onChangeDate}
-        />
-        <span className={style_object.date_range_input_wrapper_style}>
-          <input
-            className={style_object.date_range_input_style + "w-[100px] "}
-            type="text"
-            placeholder="hh:mm"
-            value={utils.inputTimeParser.timeInput(startAt)}
-            onFocus={() => setStartAtInputIsOpened(true)}
-            onChange={() => {}}
-          />
-          <DateTimeDropDown
-            objectArray={dateTimeArrayGenerator(startAt)}
-            isOpen={startAtInputIsOpened}
-            setIsOpen={setStartAtInputIsOpened}
-            action={setStartAt}
-          />
-        </span>
-        <span>-</span>
-        <span className={style_object.date_range_input_wrapper_style}>
-          <input
-            className={style_object.date_range_input_style + "w-[100px] "}
-            type="text"
-            placeholder="hh:mm"
-            value={utils.inputTimeParser.timeInput(endTo)}
-            onFocus={() => setEndToInputIsOpened(true)}
-            onChange={() => {}}
-          />
-          <DateTimeDropDown
-            objectArray={dateTimeArrayGenerator(startAt, true)}
-            isOpen={endToInputIsOpened}
-            setIsOpen={setEndToInputIsOpened}
-            action={setEndTo}
-          />
-        </span>
+        <div className={style_object.repeat_container_style}>
+          <label className={style_object.repeat_week_label_style}>
+            <input
+              type="checkbox"
+              className="hidden "
+              checked={isRepeat}
+              onChange={(e) => {
+                dispatch(setIsRepeat(e.target.checked));
+              }}
+            />
+            <img
+              src={
+                isRepeat
+                  ? "/icons/checkbox_checked.svg"
+                  : "/icons/checkbox_blank.svg"
+              }
+              alt={isRepeat ? "checkbox checked icon" : "checkbox blank icon"}
+              width={24}
+              height={24}
+            />
+            <span>
+              {`매주 ${
+                daysOfWeek[
+                  utils.parseISOToDate(startAtIsoString as string).getDay()
+                ]
+              }요일 반복`}
+            </span>
+          </label>
+        </div>
       </div>
       <div className={style_object.decision_section_style}>
         <button className={style_object.option_button_style}>

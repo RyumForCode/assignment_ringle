@@ -3,6 +3,7 @@ import { useSelectDate } from "../../hooks/useSelectDate";
 import { RootState } from "../../store/store";
 import utils from "../../utils";
 import style_object from "./style";
+import { useMemo } from "react";
 
 export const Header = () => {
   const { currentDate } = useSelector((state: RootState) => state.currentDate);
@@ -21,6 +22,13 @@ export const Header = () => {
     date.setDate(date.getDate() + 7 * delta);
     selectDate(date);
   };
+
+  const dateIndicatorDisplay = useMemo(() => {
+    const date = utils.getDateWithoutTime(utils.parseISOToDate(currentDate));
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    return `${year}년 ${month}월`;
+  }, [currentDate]);
 
   return (
     <header className={style_object.wrapper_style}>
@@ -58,7 +66,7 @@ export const Header = () => {
             <img src="/icons/chevron_right.svg" alt="chevron right icon" />
           </button>
           <span className={style_object.current_date_indicator_style}>
-            2025년 1월
+            {dateIndicatorDisplay}
           </span>
         </div>
         <div className={style_object.function_controller_style}>

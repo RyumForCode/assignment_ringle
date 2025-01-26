@@ -6,6 +6,7 @@ interface ModalObject {
   title: string;
   startAtIsoString: string | null;
   endToIsoString: string | null;
+  isRepeat: boolean;
 }
 
 const initialState: ModalObject = {
@@ -14,6 +15,7 @@ const initialState: ModalObject = {
   title: "",
   startAtIsoString: null,
   endToIsoString: null,
+  isRepeat: false,
 };
 
 const modalSlice = createSlice({
@@ -37,6 +39,7 @@ const modalSlice = createSlice({
       state.startAtIsoString = null;
       state.endToIsoString = null;
       state.title = "";
+      state.isRepeat = false;
       state.isOpen = false;
     },
     setStartAt(
@@ -55,12 +58,21 @@ const modalSlice = createSlice({
     ) {
       state.endToIsoString = action.payload.isoString;
     },
+    setIsRepeat(state, action: PayloadAction<boolean>) {
+      state.isRepeat = action.payload;
+    },
     setTitle(state, action: PayloadAction<{ title: string }>) {
       state.title = action.payload.title;
     },
   },
 });
 
-export const { openModal, closeModal, setStartAt, setEndTo, setTitle } =
-  modalSlice.actions;
+export const {
+  openModal,
+  closeModal,
+  setStartAt,
+  setEndTo,
+  setTitle,
+  setIsRepeat,
+} = modalSlice.actions;
 export default modalSlice.reducer;
