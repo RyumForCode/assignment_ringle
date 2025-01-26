@@ -18,15 +18,14 @@ export const WeekColumn = ({ date }: { date: Date }) => {
   // Check existence status for each column
   const isCreating = useMemo(() => {
     if (!startAtIsoString || !endToIsoString) return;
-    const isStartAtToday = utils.isSameDate(
-      date,
-      utils.parseISOToDate(startAtIsoString)
-    );
-    const isEndToToday = utils.isSameDate(
-      date,
-      utils.parseISOToDate(endToIsoString)
-    );
-    return isOpen && (isStartAtToday || isEndToToday);
+    const startAt = utils
+      .getDateWithoutTime(utils.parseISOToDate(startAtIsoString))
+      .getTime();
+    const endTo = utils
+      .getDateWithoutTime(utils.parseISOToDate(endToIsoString))
+      .getTime();
+    const currentDate = date.getTime();
+    return isOpen && currentDate >= startAt && currentDate <= endTo;
   }, [startAtIsoString, endToIsoString, isOpen, date]);
 
   // Temporary object for mock the currently creating schedule card
@@ -57,7 +56,7 @@ export const WeekColumn = ({ date }: { date: Date }) => {
       const endToDate = utils
         .getDateWithoutTime(utils.parseISOToDate(endToIsoString))
         .getTime();
-      return columnDate === startAtDate || columnDate === endToDate;
+      return columnDate >= startAtDate && columnDate <= endToDate;
     }
   );
 
