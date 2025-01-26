@@ -1,3 +1,5 @@
+import { ScheduleObject } from "../store/scheduleSlice";
+
 const utils = {
   calendarGenerator: (year: number, month: number) => {
     const firstDayOfMonth = new Date(year, month, 1);
@@ -119,6 +121,35 @@ const utils = {
     return (
       standardPattern === startAtPattern || standardPattern === endToPattern
     );
+  },
+  repeatWeekDateConverter: (date: Date, schedule: ScheduleObject) => {
+    const oneWeekInMs = 7 * 24 * 60 * 60 * 1000; // 604800000
+    const { startAtIsoString, endToIsoString } = schedule;
+    const startAt = utils.parseISOToDate(startAtIsoString);
+    const startDate = utils.getDateWithoutTime(startAt);
+    const endTo = utils.parseISOToDate(endToIsoString);
+    const endDate = utils.getDateWithoutTime(endTo);
+
+    if (startDate.getTime() % oneWeekInMs === date.getTime() % oneWeekInMs) {
+      const compensator =
+        ((date.getTime() - startDate.getTime()) / oneWeekInMs) * 7;
+      startAt.setDate(startAt.getDate() + compensator);
+      endTo.setDate(endTo.getDate() + compensator);
+    } else if (
+      endDate.getTime() % oneWeekInMs ===
+      date.getTime() % oneWeekInMs
+    ) {
+      const compensator =
+        ((date.getTime() - endDate.getTime()) / oneWeekInMs) * 7;
+      startAt.setDate(startAt.getDate() + compensator);
+      endTo.setDate(endTo.getDate() + compensator);
+    }
+
+    return {
+      ...schedule,
+      startAtIsoString: utils.stringifyDateToISO(startAt),
+      endToIsoString: utils.stringifyDateToISO(endTo),
+    };
   },
 };
 
