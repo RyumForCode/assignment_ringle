@@ -7,7 +7,7 @@ const date_time_drop_down_style_object = {
     "h-[40px] px-[15px] " +
     "font-[Google_Sans] text-[14px] leading-[40px] " +
     "hover:bg-[#dde3ea] cursor-pointer ",
-  list_button_style: "w-full h-full text-start ",
+  list_button_style: "w-full h-full text-start " + "whitespace-nowrap ",
 };
 
 export default date_time_drop_down_style_object;

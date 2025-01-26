@@ -5,7 +5,8 @@ const header_style_object = {
     "w-[238px] pr-[25px] " +
     "flex flex-row justify-start items-center shrink-0 ",
   interaction_container_style:
-    "w-full " + "flex flex-row justify-between items-center shrink-1 ",
+    "w-full min-w-[662px] " +
+    "flex flex-row justify-between items-center shrink-1 ",
   user_info_container_style:
     "px-[2px_4px] " + "flex flex-row justify-start items-center shrink-0 ",
   menu_icon_button:
@@ -23,6 +24,7 @@ const header_style_object = {
     "px-[6px] " + "flex flex-row justify-center items-center ",
   function_icon_style:
     "p-[8px] rounded-full " +
+    "shrink-0 " +
     "cursor-pointer hover:bg-[var(--color-hoverGray)] duration-[100ms] ",
   other_service_menu_icon_style:
     "m-[4px_2px_4px_0] p-[8px] rounded-full " +
@@ -34,15 +36,16 @@ const header_style_object = {
   today_finder_button_style:
     "h-[40px] px-[24px] m-[4px_20px_4px_0] " +
     "border-[1px] border-[var(--color-border)] rounded-full " +
-    "text-[14px] " +
+    "text-[14px] whitespace-nowrap " +
     "cursor-pointer hover:bg-[var(--color-hoverGray)] duration-[100ms] " +
     "active:bg-[var(--color-activeGray)] ",
   unit_change_arrow_icon_style:
     "p-[4px] rounded-full " +
+    "shrink-0 " +
     "cursor-pointer hover:bg-[var(--color-hoverGray)] duration-[100ms] ",
   current_date_indicator_style:
     "p-[8px] mx-[11px] " +
-    "font-[Google_Sans] text-[21.5px] leading-[100%] select-none ",
+    "font-[Google_Sans] text-[21.5px] leading-[100%] whitespace-nowrap select-none ",
   calendar_unit_dropdown_button_style:
     "h-[40px] ml-[12px] my-[4px] px-[17px] " +
     "flex flex-row justify-center items-center " +
@@ -50,7 +53,7 @@ const header_style_object = {
     "text-[14px] " +
     "cursor-pointer hover:bg-[var(--color-hoverGray)] duration-[100ms] ",
   view_selection_fieldset_style:
-    "ml-[12px] " + "flex flex-row justify-center items-center ",
+    "ml-[12px] " + "flex flex-row justify-center items-center shrink-0 ",
   view_selection_input_left_style:
     "p-[9px_14px_9px_18px] bg-[#c2e7ff] " +
     "border-y-[1px] border-l-[1px] border-[var(--color-border)] rounded-[20px_0_0_20px] " +

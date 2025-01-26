@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { daysOfWeek } from "../../constants";
 import { useSelectDate } from "../../hooks/useSelectDate";
@@ -9,6 +9,7 @@ import {
 import type { RootState } from "../../store/store";
 import utils from "../../utils";
 import style_object from "./style";
+import { openModal } from "../../store/modalSlice";
 
 export const DatePicker = () => {
   const { currentDate } = useSelector((state: RootState) => state.currentDate);
@@ -37,15 +38,33 @@ export const DatePicker = () => {
     return `${yearMonth.getFullYear()}년 ${yearMonth.getMonth() + 1}월`;
   }, [currentYearMonth]);
 
-  // Event handler for date button elements
+  // onClick event for date button elements
   const onClickDate = (date: Date) => {
     selectDate(date);
+  };
+
+  // onClick event for schedule creation button
+  const onClickCreateButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const { x, y, width } = e.currentTarget.getBoundingClientRect();
+    const endTo = utils.parseISOToDate(currentDate);
+    endTo.setMinutes(endTo.getMinutes() + 60);
+    const endToIsoString = utils.stringifyDateToISO(endTo);
+    dispatch(
+      openModal({
+        position: { x: x + width + 8, y },
+        startAtIsoString: currentDate,
+        endToIsoString,
+      })
+    );
   };
 
   return (
     <div className={style_object.wrapper_style}>
       <div className={style_object.add_schedule_section_style}>
-        <button className={style_object.add_schedule_button_style}>
+        <button
+          className={style_object.add_schedule_button_style}
+          onClick={onClickCreateButton}
+        >
           <img src="/icons/add.svg" alt="add icon" /> 만들기
           <img src="/icons/arrow_drop_down.svg" alt="arrow drop down icon" />
         </button>
