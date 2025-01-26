@@ -9,9 +9,8 @@ import { ScheduleObject } from "../../store/scheduleSlice";
 
 export const WeekColumn = ({ date }: { date: Date }) => {
   const { scheduleList } = useSelector((state: RootState) => state.schedule);
-  const { isOpen, startAtIsoString, endToIsoString, title } = useSelector(
-    (state: RootState) => state.modal
-  );
+  const { isOpen, startAtIsoString, endToIsoString, title, isRepeat } =
+    useSelector((state: RootState) => state.modal);
 
   const dispatch = useDispatch();
 
@@ -37,26 +36,35 @@ export const WeekColumn = ({ date }: { date: Date }) => {
         startAtIsoString: isoDate,
         endToIsoString: isoDate,
         uid: "no id",
+        isRepeat,
       };
     return {
       title,
       startAtIsoString,
       endToIsoString,
       uid: utils.generateUID(),
+      isRepeat,
     };
-  }, [title, startAtIsoString, endToIsoString]);
+  }, [title, startAtIsoString, endToIsoString, isRepeat]);
 
   // Filtering schedules for current week array elements
   const filteredSchedules = scheduleList.filter(
-    ({ startAtIsoString, endToIsoString }) => {
-      const columnDate = utils.getDateWithoutTime(date).getTime();
-      const startAtDate = utils
-        .getDateWithoutTime(utils.parseISOToDate(startAtIsoString))
-        .getTime();
-      const endToDate = utils
-        .getDateWithoutTime(utils.parseISOToDate(endToIsoString))
-        .getTime();
-      return columnDate >= startAtDate && columnDate <= endToDate;
+    ({ startAtIsoString, endToIsoString, isRepeat }) => {
+      const columnDate = utils.getDateWithoutTime(date);
+      const startAtDate = utils.getDateWithoutTime(
+        utils.parseISOToDate(startAtIsoString)
+      );
+      const endToDate = utils.getDateWithoutTime(
+        utils.parseISOToDate(endToIsoString)
+      );
+      if (isRepeat) {
+        return utils.repeatWeekChecker(startAtDate, endToDate, columnDate);
+      } else {
+        return (
+          columnDate.getTime() >= startAtDate.getTime() &&
+          columnDate.getTime() <= endToDate.getTime()
+        );
+      }
     }
   );
 
@@ -79,8 +87,8 @@ export const WeekColumn = ({ date }: { date: Date }) => {
     const cordinate = { x: 0, y: 0 };
 
     // To compensate modal position
-    if (e.pageY + 299 + 32 > window.innerHeight) {
-      cordinate.y = e.pageY - 299;
+    if (e.pageY + 339 + 32 > window.innerHeight) {
+      cordinate.y = e.pageY - 339;
     } else {
       cordinate.y = e.pageY;
     }
@@ -110,13 +118,37 @@ export const WeekColumn = ({ date }: { date: Date }) => {
       }}
     >
       {/* Display of existing schedules */}
-      {filteredSchedules.map((scheduleObject) => (
-        <ScheduleCard
-          scheduleObject={scheduleObject}
-          date={date}
-          key={scheduleObject.uid + "schedule_card"}
-        />
-      ))}
+      {filteredSchedules.map((scheduleObject) => {
+        if (scheduleObject.isRepeat) {
+          const newScheduleObject = utils.repeatWeekDateConverter(
+            date,
+            scheduleObject
+          );
+          return (
+            <ScheduleCard
+              scheduleObject={newScheduleObject}
+              date={date}
+              key={
+                newScheduleObject.uid +
+                newScheduleObject.startAtIsoString +
+                "schedule_card"
+              }
+            />
+          );
+        } else {
+          return (
+            <ScheduleCard
+              scheduleObject={scheduleObject}
+              date={date}
+              key={
+                scheduleObject.uid +
+                scheduleObject.startAtIsoString +
+                "schedule_card"
+              }
+            />
+          );
+        }
+      })}
       {/* Display of the mock schedule (Currently creating) */}
       {isCreating && (
         <ScheduleCard
