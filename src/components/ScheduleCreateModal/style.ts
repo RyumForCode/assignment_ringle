@@ -20,6 +20,8 @@ const schedule_modal_style_object = {
     "px-[8px] h-[36px] bg-[var(--color-sub)] rounded-[8px] " +
     "text-[14px] " +
     "cursor-pointer hover:bg-[var(--color-hoverSub)] transition-[50ms] ",
+  date_params_section_style:
+    "w-[full] h-fit " + "flex flex-col justify-start align-start ",
   date_range_section_style:
     "w-[calc(100%-32px)] h-[40px] m-[16px_16px_0_16px] " +
     "flex flex-row justify-start items-center gap-[8px] ",
@@ -31,6 +33,12 @@ const schedule_modal_style_object = {
     "hover:bg-[#ced3da] " +
     "border-b-[3px] border-transparent " +
     "focus:outline-none focus:border-[var(--color-key)] transition-[50ms] ",
+  repeat_container_style: "pl-[68px] mt-[16px] ",
+  repeat_week_label_style:
+    "w-fit " +
+    "flex flex-row justify-start items-center gap-[12px] " +
+    "font-[Google_Sans] text-[14px] " +
+    "cursor-pointer select-none ",
   decision_section_style:
     "w-full h-[48px] p-[2px_16px_2px_16px] my-[20px_10px] " +
     "flex flex-row justify-end items-center gap-[8px] ",
